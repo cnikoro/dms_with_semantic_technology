@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+   <form action="{% url 'home' %}" method="post">
+   {% csrf_token %}
+   {{ form.non_field_errors }}
+   <div class='container'>
+      <div class='row' style="padding-top:20px;">
+	 <div class='col-sm-6'>
+            <div class='fieldWrapper'>
+               {{ form.pid.errors }}
+	       <label for="{{ form.pid.id_for_label}}">
+	          Patient ID:&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{ form.pid }}</span>
+             </div>
+	  </div>
+	  <div class='col-sm-6'>
+	     <div class='fieldWrapper'>
+	        {{ form.age.errors }}
+	        <label for="{{form.age.id_for_label}}">
+	           Age:&nbsp;
+	        </label>
+		<span style="border:0px;border-bottom:2px solid #eee">{{ form.age }}</span>
+             </div>
+	  </div>
+      </div>
+      <div class='row' style="padding-top:20px;">
+         <div class='col-sm-6'>
+	    <div class='fieldWrapper'>
+	       {{ form.bs.errors }}
+	       <label for="{{form.bs.id_for_label}}">
+	          Blood Sugar in Fasting (mmol/L):&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{ form.bs }}</span>
+	    </div>
+         </div>
+         <div class='col-sm-6'>
+            <div class="fieldWrapper">
+               {{form.bp.errors}}
+	       <label for="{{form.bp.id_for_label}}">
+	          Blood Sugar 90 Minutes After Meal (mmol/L):&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{form.bp}}</span>
+	    </div>
+	 </div>
+      </div>
+      <div class='row' style="padding-top:20px;">
+         <div class="col-sm-6">
+            <div class="fieldWrapper">
+	       {{form.pr.errors}}
+	       <label for="{{form.pr.id_for_label}}">
+	          Plasma Glucose Test Taken at Random (mmol/L):&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{form.pr}}</span>
+            </div>
+         </div>
+	 <div class="col-sm-6">
+            <div class="fieldWrapper">
+               {{form.pf.errors}}
+	       <label for="{{form.pf.id_for_label}}">
+	          Plasma Glucose Test Taken Before Breakfast (mmol/L):&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{form.pf}}</span>
+	    </div>
+	 </div>
+      </div>
+      <div class='row' style="padding-top:20px;">
+         <div class='col-sm-6'>
+            <div class="fieldWrapper">
+               {{form.hbalc.errors}}
+	       <label for="{{form.hbalc.id_for_label}}">
+                 Haemoglobin A1c (mmol/L) :&nbsp; 
+	       </label>
+	       <span style="width: 30px; border:0px;border-bottom:2px solid #eee">{{form.hbalc}}</span>
+	    </div>
+         </div>
+      </div>
+      <div style='text-align:center;padding-top:30px;'>
+         <button onClick=insertFeedback() type="submit" value='insert' 
+		 class="btn-primary"> Insert
+	 </button>
+      </div>
+   </div>
+   </form>
+   <script>
+	function insertFeedback(){
+            window.alert("Record successfully added.")
+	}
+	</script>
+{% endblock %}

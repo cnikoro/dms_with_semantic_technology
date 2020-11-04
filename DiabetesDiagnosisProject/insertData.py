@@ -1,0 +1,89 @@
+from owlready2 import *
+from rdflib.graph import Graph
+from .fetchData import main as fetch
+from . import settings
+import os
+
+def insertData(ontology, request, pid):
+    """This function inserts data into the ontology.
+       graph: type Graph
+          description: hoot to the ontology
+       request: type str
+          description: sparql query
+       return: None
+    """
+
+    world = World()
+    world.get_ontology(ontology).load()
+    #individual = (world.ontologies["dbo3.owl#"]).Patient(\
+    #        "p" + str(pid), namespace=world.ontologies["dbo3.owl#"])
+    graph = world.as_rdflib_graph()
+    if graph:
+        try:
+            with world.ontologies["dbo3.owl#"].load():
+                graph.update(request)
+        except:
+            print("Something went wrong:")
+    else:
+        print("Connection failed")
+
+    world.save(os.path.join(settings.BASE_DIR, "dbo3.owl"))
+
+def main(data, pid):
+    """main(data) -> None
+       Calls insertData to connect and insert data to Ontology
+    """
+    
+    PREFIX = """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        PREFIX : <http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#>
+    """
+    result = fetch("?id", "=", ":" + str(pid))
+
+    if len(result) == 0:
+        request = PREFIX + """
+        INSERT DATA
+        {{
+          :p{pid} a :Patient;
+               :hasID :{pid};
+               :hasAge :{age};
+               :hasBloodSugar :{bs};
+               :hasBloodPressure :{bp};
+               :hasPlasmaR :{pr};
+               :hasPlasmaF :{pf};
+               :hasHBALC :{hbalc}.
+        }}
+        """.format(pid = data[0], age = data[1], \
+                bs = data[2], bp = data[3], pr = data[4], \
+                pf = data[5], hbalc = data[6])
+    else:
+        print("ID already exist")
+        return 0
+        '''
+        request = PREFIX + """
+        INSERT
+        {{
+            ?patient :hasAge :{age};
+                     :hasBloodSugar :{bs};
+                     :hasBloodPressure :{bp};
+                     :hasPlasmaR :{pr};
+                     :hasPlasmaF :{pf};
+                     :hasHBALC :{hbalc}.
+        }}
+        WHERE
+        {{
+             ?patient :hasID {pid}.
+        }}
+        """.format(pid = data[0], age = data[1], bs = data[2], bp = data[3], \
+                pr = data[4], pf = data[5], hbalc = data[6])
+        '''
+    onto = os.path.join(settings.BASE_DIR, "dbo3.owl")
+    insertData(onto, request, pid)
+    return 1
+
+if __name__ == "__main__":
+    data = [1011, 42, 7.7, 6.2, 52, 9.2, 11.2]
+    main(data, data[0])

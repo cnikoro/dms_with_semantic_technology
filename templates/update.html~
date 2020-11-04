@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+   {% csrf_token %}
+   <form method='post' action='{% url redirect_example %}' class="form-inline was-validated">
+      <div class='container'
+	 <div class='row' style="padding-top:20px;">
+	 <div class='col-sm-6'>
+            <div class='fieldWrapper'>
+               {{ form.pid.errors }}
+	       <label for="{{ form.pid.id_for_label}}">
+	          Patient ID:&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{ form.pid }}</span>
+             </div>
+	  </div>
+	 <div class='col-sm-6'>
+	 <div class='fieldWrapper'>
+	        {{ form.feature.errors }}
+	        <label for="{{form.feature.id_for_label}}">
+	           Feature:&nbsp;
+	        </label>
+		<span style="border:0px;border-bottom:2px solid #eee">{{ form.feature }}</span>
+             </div>
+	  </div>
+	 </div>
+         <div class='col-sm-6'>
+             <div class='fieldWrapper'>
+	        {{ form.value.errors }}
+	        <label for="{{form.value.id_for_label}}">
+	           Value:&nbsp;
+	        </label>
+		<span style="border:0px;border-bottom:2px solid #eee">{{ form.value }}</span>
+             </div>
+	   </div>
+	 </div>
+	 <div style='text-align:center;padding-top:30px;'>
+	    <button type="submit" value='update' class="btn-primary">
+               Update
+	    </button>
+	 </div>
+      </div>
+   </form>	   
+{% endblock %}

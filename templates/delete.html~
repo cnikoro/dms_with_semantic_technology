@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load loadRecord %}
+{% block content %}
+   <form action="{% url 'redirect_example' %}" method="post", id="update">
+   {% csrf_token %}
+   {{ form.non_field_errors }}
+   <div class='container'>
+      <div class='row' style="padding-top:20px;">
+	 <div class='col-sm-6'>
+            <div class='fieldWrapper'>
+               {{ form.patientID.errors }}
+	       <label for="{{ form.patientID.id_for_label}}">
+	          Enter Patient ID:&nbsp;
+	       </label>
+	       <span style="border:0px;border-bottom:2px solid #eee">{{ form.patientID }}</span>
+             </div>
+	  </div>
+      <div class='row' id='verifyRecord' style="padding-top:20px;display: none;">
+        {% loadRecord form['pid']|toString as record %}
+        <div class='col-sm-12' style="margin:auto 0px;">
+	  <table class="table">
+            <caption>Patient Details</caption>
+	      <tr>
+	        <th>Features</th>
+		<th>Values</th>
+	      </tr>
+	      {% for feature, value in record.items %}
+	      <tr>
+	        <td>{{ feature }}</td>
+		<td>{{ value }}</td>
+	      </tr>
+          </table>
+	</div>
+      </div>
+      <div style='text-align:center;padding-top:30px;'>
+         <button type="button" class="btn-info" onclick="getDataAndCheck()">
+               Verify
+         </button>
+         <button onclick=confirm() type="submit" value='delete' 
+		 class="btn-primary"> Delete
+	 </button>
+      </div>
+   </div>
+   </form>
+   
+	<script>
+	function confirm(){
+		window.alert("You are about to delete a record. Do you want to proceed?")
+	};
+        function getDataAndCheck(){
+            var verifyRecord = document.getElementById("verifyRecord");
+	    verifyRecord.style.display = "block";
+        }
+	</script>
+{% endblock %}

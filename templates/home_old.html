@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+   {% csrf_token %}
+   <form method='post' action='' class="form-inline was-validated">
+      <div class='container'
+	 style='margin: auto;'>
+	 <div class='row'>
+         <div class='col-sm-4'>
+         <div class='form-group' style="padding-top: 20px;">
+	    <label for="npreg">Number of Preg.:&nbsp;</label>
+	    <input type="number" id="npreg" name="npreg"
+	       class='form-control' min="0" max="20"
+	       style='width: 100px;' required>
+	    <div class="invalid-feedback">
+	       * required
+	    </div>
+         </div>
+	 </div>
+	 <div class='col-sm-4'>
+	 <div class='form-group' style="padding-top: 20px;">
+	    <label for="glu">Plasma Glu Conc.:&nbsp;</label>
+	    <input type="number" id="glu" name="glu"
+	        style='width: 100px;' class='form-control' required>
+	    <div class="invalid-feedback">
+	       * required
+	    </div>
+	 </div>
+	 </div>
+         <div class='col-sm-4'>
+	 <div class='form-group' style='padding-top: 20px;'>
+	    <label for='bp'>Blood Pressure(mmHg):&nbsp;</label>
+	    <input type='number' id='bp' name='bp'
+               style='width: 100px;' class='form-control' required>
+	    <div class='invalid-feedback'>
+	       * required
+	    </div>
+	 </div>
+	 </div>
+	 </div>
+	 <div class='row'>
+	    <div class="col-sm-4">
+               <div class='form-group' style='padding-top: 20px;'>
+	          <label for='st'>Skin Thickness(mm): &nbsp;
+	          </label>
+		  <input type='number' id='st' name='st'
+		     style='width:100px;'
+		     class='form-control'
+		     required>
+		  <div class='invalid-feedback'>
+		     * required
+		  </div>
+	       </div>
+            </div>
+	    <div class="col-sm-4">
+	       <div class='form-group' style='padding-top: 20px;'>
+	           <label for='isl'>Insulin(mu U/ml): &nbsp;
+	           </label>
+		   <input type='number' id='isl' name='isl'
+	              style='width:100px;'
+		      class='form-control'
+		      required>
+		   <div class='invalid-feedback'>
+		      * required
+		   </div>
+	       </div>
+	    </div>
+	    <div class="col-sm-4">
+               <div class='form-group' style='padding-top: 20px;'>
+                  <label for='bmi'>
+		     Body Mass Index(kg/m<sup>2</sup>):
+		     &nbsp;
+		  </label>
+                  <input type='number' step='0.1' id='bmi' name='bmi'
+                      style='width:100px;'
+		      class='form-control'
+		      required>
+		   <div class='invalid-feedback'>
+		      * required
+		   </div>
+	       </div>
+            </div>
+	 </div>
+	 <div class='row'>
+	    <div class="col-sm-4">
+               <div class='form-group' style='padding-top:20px;'>
+                  <label for='dpf'>
+	             Diabetes Ped. Func.:&nbsp;
+		  </label>
+		  <input type='number' step='0.001' id='dpf'
+	             name='dpf' style='width:100px;'
+		     class='form-control' required>
+		  <div class='invalid-feedback'>
+	             * required
+		  </div>
+	       </div>
+            </div>
+	    <div class="col-sm-4">
+	       <div class='form-group' style='padding-top:20px;'>
+                  <label for='age'>Age:&nbsp;</label>
+		  <input type='number' id='age' name='age'
+	             style='width:100px;'
+		     class='form-control' required>
+		  <div class='invalid-feedback'>
+                     * required
+	          </div>
+	       </div>
+            </div>
+         </div>
+	 <div style='text-align:center;padding-top:30px;'>
+	    <button type="submit" value='diagnose' class="btn-primary">
+               Diagnose
+	    </button>
+	    <button disabled>
+               Visualize
+            </button>
+	 </div>
+      </div>
+   </form>	   
+{% endblock %}
