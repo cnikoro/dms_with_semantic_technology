@@ -26,14 +26,14 @@ def deleteData(ontology, pid):
         #print("Connection failed")
     try:
         destroy_entity((world.ontologies["dbo3.owl#"].load())["p" + str(pid)])
-        world.save(os.path.join(settings.BASE_DIR, "dbo3.owl"))
+        world.save("dbo3.owl")
     except:
         print("Individual doesn't exist")
         return 0
     return 1
 
 def main(pid):
-    onto = os.path.join(settings.BASE_DIR, "dbo3.owl")
+    onto = "dbo3.owl"
     outcome = deleteData(onto, pid)
     return outcome
 

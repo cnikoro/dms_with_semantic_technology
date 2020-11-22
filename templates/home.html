@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Home</li>
+	  <li class="breadcrumb-item"><a href="{% url 'insert' %}">Insert</a></li>
+	  <li class="breadcrumb-item"><a href="{% url 'update' %}">Update</a></li>
+	  <li class="breadcrumb-item"><a href="{% url 'verify' %}">Delete</a></li>
+       </ol>
+    </nav>
    <form action="{% url 'redirect_example' %}" method="post">
    {% csrf_token %}
    {{ form.non_field_errors }}

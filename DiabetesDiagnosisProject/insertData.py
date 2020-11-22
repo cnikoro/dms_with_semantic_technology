@@ -27,7 +27,7 @@ def insertData(ontology, request, pid):
     else:
         print("Connection failed")
 
-    world.save(os.path.join(settings.BASE_DIR, "dbo3.owl"))
+    world.save( "dbo3.owl")
 
 def main(data, pid):
     """main(data) -> None
@@ -80,7 +80,7 @@ def main(data, pid):
         """.format(pid = data[0], age = data[1], bs = data[2], bp = data[3], \
                 pr = data[4], pf = data[5], hbalc = data[6])
         '''
-    onto = os.path.join(settings.BASE_DIR, "dbo3.owl")
+    onto = "dbo3.owl"
     insertData(onto, request, pid)
     return 1
 

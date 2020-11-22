@@ -57,6 +57,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
+            'libraries': {'DiabetesDiagnosisProject_tags': 'DiabetesDiagnosisProject.custom_tags',},
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

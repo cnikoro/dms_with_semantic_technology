@@ -1,5 +1,5 @@
 from django import template
-from .DiabetesDiagnosisProject import fetchData.main as main
+from .fetchData import main
 
 register = template.Library()
 

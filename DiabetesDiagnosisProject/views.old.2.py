@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import DiagnosisForm, InsertForm, UpdateForm, VerifyForm
+from .forms import DiagnosisForm, InsertForm, UpdateForm, DeleteForm
 from django.urls import reverse
 
 import pandas as pd
@@ -40,10 +40,7 @@ def diagnose(request):
             """
             features = ['Age', 'BS Fast', 'BS pp', 'Plasma R', 'Plasma F', 'HbAlc']
             data = main("?id", "=", ":{}".format(patientID))
-            if data:
-                data = data[0]
-            else:
-                return render(request, "home.html", {"form": form})
+            data = data[0]
             columns = features
             df = pd.DataFrame(data, index=columns)
             #print(df.shape)
@@ -94,8 +91,7 @@ def insert_view(request):
 
             outcome = insert(data, data[0])
             print(outcome)
-            #return render(request, "insert.html", {"form": form, "outcome": outcome})
-            return redirect(diagnose)
+            return render(request, "insert.html", {"form": form, "outcome": outcome})
     else:
         form = InsertForm()
     return render(request, "insert.html", {"form": form})
@@ -110,48 +106,26 @@ def update_view(request):
             if (str(value)).find(".000") == 1:
                 value = int(value)
             data = main("?id", "=", ":{}".format(pid))
-            if not data:
-                return render(request, "update_with_errors.html", {"form": form})
             outcome = update(feature, value, pid)
             print(outcome)
-            #return render(request, "update.html", {"form": form, "outcome": outcome, "data": data})
-            return redirect(diagnose)
+            return render(request, "update.html", {"form": form, "outcome": outcome, "data": data})
     else:
         form = UpdateForm()
-        print("Hi")
     return render(request, "update.html", {"form": form})
 
-def delete_view(request, patientID):
-    """
+def delete_view(request):
     if request.method == "POST":
         form = DeleteForm(request.POST)
         if form.is_valid():
-            #pid = form.cleaned_data["pid"]
+            pid = form.cleaned_data["pid"]
+            data = main("?id", "=", ":{}".format(pid))
             #ata = main("?id", "=", ":{}".format(pid))
             outcome = delete(pid)
             print(outcome)
-            return render(request, "delete.html", {"form":form, "outcome": outcome})
+            return render(request, "delete.html", {"form":form, "outcome": outcome, "data": data})
     else:
         form = DeleteForm()
-    return render(request, "delete.html", {"form": form})
-    """
-    _ = delete(patientID)
-    return render(request, "delete.html")
-
-def verify_view(request):
-    if request.method == "POST":
-        form = VerifyForm(request.POST)
-        if form.is_valid():
-            pid = form.cleaned_data["pid"]
-            data = main("?id", "=", ":{}".format(pid))
-            print(data)
-            if data:
-               return render(request, "verify.html", {"form": form, "data": data[0], "pid": pid})
-            else:
-                return render(request, "verify.html", {"form": form, "pid": pid})
-    else:
-        form = VerifyForm()
-        pid=form["pid"].value()
-    return render(request, "verify.html", {"form": form, "pid": pid})
+        pid = form['pid']
+    return render(request, "delete.html", {"form": form, 'pid': pid})
 
             

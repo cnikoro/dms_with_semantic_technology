@@ -27,7 +27,7 @@ def update(ontology, request):
     else:
         print("Connection failed")
 
-    world.save(os.path.join(settings.BASE_DIR, "dbo3.owl"))
+    world.save( "dbo3.owl")
 
 def main(feature, data, pid):
     """main(data) -> None
@@ -42,7 +42,7 @@ def main(feature, data, pid):
         PREFIX : <http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#>
     """
     result = fetch("?id", "=", ":" + str(pid))
-    onto = os.path.join(settings.BASE_DIR, "dbo3.owl")
+    onto = "dbo3.owl"
     if len(result) != 0:
         if feature == "age":
             request = PREFIX + """

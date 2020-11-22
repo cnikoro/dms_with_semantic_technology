@@ -20,8 +20,12 @@ from .views import *
 urlpatterns = [
     path('', diagnose, name='home'),
     path('result/', diagnose, name='redirect_example'),
-    path('insert/', insert, name='insert'),
-    path('update/', update, name='update'),
-    path('delete/', delete, name='delete'),
+    path('insert/', insert_view, name='insert'),
+    path('insert_result/', insert_view, name='redirect_insert'),
+    path('update/', update_view, name='update'),
+    path('update_result/', update_view, name='redirect_update'),
+    path('delete/<int:patientID>', delete_view, name='delete'),
+    path('verify/', verify_view, name='verify'),
+    path('verify_result/', verify_view, name='redirect_verify'),
     path('admin/', admin.site.urls),
 ]
