@@ -15294,5 +15294,25 @@
   <unti:hasPlasmaR rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#8.7"/>
 </unti:Patient>
 
+<unti:Patient rdf:about="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#p1013">
+  <unti:hasAge rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#27"/>
+  <unti:hasBloodPressure rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#100"/>
+  <unti:hasBloodSugar rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#70"/>
+  <unti:hasHBALC rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#69"/>
+  <unti:hasID rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#1013"/>
+  <unti:hasPlasmaF rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#40"/>
+  <unti:hasPlasmaR rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#12"/>
+</unti:Patient>
+
+<unti:Patient rdf:about="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#p1014">
+  <unti:hasAge rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#30"/>
+  <unti:hasBloodPressure rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#20"/>
+  <unti:hasBloodSugar rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#30"/>
+  <unti:hasHBALC rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#28"/>
+  <unti:hasID rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#1014"/>
+  <unti:hasPlasmaF rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#15"/>
+  <unti:hasPlasmaR rdf:resource="http://www.semanticweb.org/user/ontologies/2020/7/untitled-ontology-32#30"/>
+</unti:Patient>
+
 
 </rdf:RDF>
