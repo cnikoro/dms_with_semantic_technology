@@ -47,22 +47,32 @@ def diagnose(request):
             columns = features
             df = pd.DataFrame(data, index=columns)
             #print(df.shape)
-            ddmodel = joblib.load(os.path.join(settings.BASE_DIR, 'DDiag_model.pkl'))
+            ddmodel = joblib.load(os.path.join(settings.BASE_DIR, 'DDiag_model_old.pkl'))
             pred = ddmodel.predict_proba(df)
             print(pred)
             predClass = pred.argmax()
             predproba = round((float(pred[0][predClass]) * 100), 2)
             ## Create a plot
             predictions = [pred[0][0], pred[0][1], pred[0][2]]
-            labels = ('Non-Diabetic', 'Type 1', 'Type 2')
+            labels = ['Non-Diabetic', 'Type 1', 'Type 2']
+            idx = np.asarray([i for i in range(len(predictions))])
             #fig = plt.figure(figsize=(2,2))
+            #fig = plt.figure()
             fig, ax = plt.subplots(1,1, figsize=(3,2))
             colors = ['aqua', '#FF0CCB', 'yellow']
             #explode=(0.5,0.5)
-            autopct = '%1.1f%%'
-            ax.pie(predictions, labels = labels, frame = True, colors=colors, autopct = autopct, shadow=True, startangle=180, rotatelabels=False)
-            ax.axis('equal')
+            #autopct = '%1.1f%%'
+            #ax.pie(predictions, labels = labels, frame = True, colors=colors, autopct = autopct, shadow=True, startangle=180, rotatelabels=False)
+            ax.barh(labels, predictions, color=colors)
+            ax.set_yticks(idx)
+            ax.set_xticks([0.0, 0.5, 1.0])
+            #ax.set_yticklabels(labels, rotation=45)
+            #ax.axis('equal')
             #plt.title('Pie chart showing the prediction statistics', pad=5.5)
+            #plt.barh(labels, predictions)
+            #plt.xticks(labels, rotation=45)
+            #print(dir(plt))
+            fig.tight_layout()
             graph = mpld3.fig_to_html(fig)
             display = 0
             #plt.savefig('static/graph.png')
